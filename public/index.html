@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Therapy4U — Professional AI Psychoanalysis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+:root {
+  /* Modern Therapy Palette */
+  --bg-main: #f8faf9;
+  --bg-card: #ffffff;
+  --primary: #4a7c72; /* Calm Sage */
+  --primary-hover: #3d665e;
+  --accent: #7fb3a9;
+  --text-dark: #2c3e3a;
+  --text-muted: #6b7c78;
+  --border-light: #e0e7e5;
+  --radius: 12px;
+  --shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-dark);
+  background: var(--bg-main);
+  line-height: 1.6;
+}
+
+/* Layout */
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+
+/* Header & Branding */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-family: "Playfair Display";
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  background: var(--primary);
+}
+
+h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 22px;
+  margin: 0;
+  color: var(--primary);
+}
+
+/* Hero Section */
+.proclamation {
+  text-align: center;
+  padding: 40px 0 60px;
+}
+
+.proclamation h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 42px;
+  margin-bottom: 10px;
+  color: var(--text-dark);
+}
+
+.proclamation p {
+  font-size: 18px;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Grid System */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 30px;
+}
+
+@media (max-width: 950px) {
+  .grid { grid-template-columns: 1fr !important; }
+}
+
+/* Modern Cards */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+}
+
+/* Form Styles */
+input, textarea {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+  padding: 14px;
+  font-family: inherit;
+  margin-bottom: 15px;
+  background: #fcfdfd;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(74, 124, 114, 0.1);
+}
+
+/* Buttons */
+.btn {
+  width: 100%;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  padding: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 15px;
+}
+
+.btn.primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn.primary:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+/* Sidebar List */
+.pitem {
+  padding: 16px;
+  margin: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pitem:hover {
+  background: #f1f5f4;
+}
+
+.pitem.active {
+  background: #edf3f2;
+  border-color: var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* Chat Interface */
+.chat-shell {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  height: 600px;
+}
+
+.chat-log {
+  flex: 1;
+  padding: 20px;
+  background: #fff;
+  overflow-y: auto;
+}
+
+.bubble {
+  padding: 12px 16px;
+  border-radius: 12px;
+  max-width: 80%;
+  margin-bottom: 15px;
+  font-size: 15px;
+}
+
+.bubble.them {
+  background: #f1f3f3;
+  color: var(--text-dark);
+  border-bottom-left-radius: 2px;
+}
+
+.bubble.me {
+  background: var(--primary);
+  color: white;
+  margin-left: auto;
+  border-bottom-right-radius: 2px;
+}
+
+/* Full Screen Logged In State */
+body.logged-in .wrap { max-width: 100%; padding: 0 20px; }
+body.logged-in #mainGrid { grid-template-columns: 1fr; }
+body.logged-in #chatCard { height: calc(100vh - 140px); }
+body.logged-in .chat-shell { height: 100%; }
+
+/* Modal */
+#limitModal .card {
+  border: none;
+  padding: 40px;
+}
+</style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">T4U</div>
+        <h1>Therapy4U</h1>
+      </div>
+      <div>
+        <button class="btn" id="logoutBtn" style="display:none; width: auto; background: none; color: var(--text-muted);">End Session</button>
+      </div>
+    </header>
+
+    <section class="proclamation" id="heroText">
+      <h2>Professional Guidance, Anytime.</h2>
+      <p>Connect with AI-specialized analysts trained in various therapeutic modalities to support your mental well-being.</p>
+    </section>
+
+    <div class="grid" id="mainGrid">
+      <div class="stack" id="authSection">
+        <div class="card" style="margin-bottom: 30px;">
+          <div style="display:flex; border-bottom:1px solid var(--border-light)">
+            <div class="tab" id="tabLogin" style="flex:1; padding:15px; text-align:center; cursor:pointer; font-weight:600;">Sign In</div>
+            <div class="tab" id="tabRegister" style="flex:1; padding:15px; text-align:center; cursor:pointer; color:var(--text-muted);">New Client</div>
+          </div>
+          <div style="padding: 30px;">
+            <div id="loginPane">
+              <input id="loginEmail" type="email" placeholder="Email Address" />
+              <input id="loginPassword" type="password" placeholder="Password" />
+              <button class="btn primary" id="loginBtn">Access Dashboard</button>
+            </div>
+            <div id="registerPane" style="display:none;">
+              <input id="regEmail" type="email" placeholder="Email Address" />
+              <input id="regPassword" type="password" placeholder="Create Password" />
+              <button class="btn primary" id="registerBtn">Create Account</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="padding: 25px;">
+          <h4 style="margin: 0 0 15px; color: var(--primary);">Session Plans</h4>
+          <button class="btn" id="buyGodBtn" style="margin-bottom: 10px; background:#f1f5f4;">Standard Access ($29.95)</button>
+          <button class="btn" id="buyAllBtn" style="margin-bottom: 10px; background:#f1f5f4;">Premium Access ($35.95)</button>
+          <button class="btn primary" id="buyLifeBtn">Lifetime Wellness ($49.95)</button>
+        </div>
+      </div>
+
+      <div class="card" id="chatCard">
+        <div class="chat-shell">
+          <div class="sidebar" id="profiles" style="background:#f8faf9; border-right:1px solid var(--border-light)"></div>
+          <div style="display: flex; flex-direction: column; height: 100%;">
+            <div style="padding: 20px; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; gap: 15px;">
+              <img id="chatAvatar" src="" alt="" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; display: none; border: 2px solid var(--accent);">
+              <div id="chatTitle" style="font-weight: 600; color: var(--primary);">Select a Therapist</div>
+            </div>
+            <div class="chat-log" id="chatLog">
+              <div id="welcomeMessage" style="text-align: center; color: var(--text-muted); margin-top: 100px;">Please sign in and select a specialist to begin your consultation.</div>
+            </div>
+            <div style="padding: 20px; border-top: 1px solid var(--border-light); display: flex; gap: 12px; background: white;">
+              <textarea id="chatInput" placeholder="Type your message here..." disabled style="flex:1; margin-bottom:0; height:50px; resize:none;"></textarea>
+              <button class="btn primary" id="sendBtn" disabled style="width: 100px;">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ALL LOGIC REMAINS UNCHANGED FROM ORIGINAL */
+    const $ = (id) => document.getElementById(id);
+    let selectedId = null;
+    let guestTeaserUsed = false;
+    const API_BASE = "";
+
+    function getToken() { return localStorage.getItem("jwt") || ""; }
+    function setToken(t) { localStorage.setItem("jwt", t); }
+    function authHeaders() { return { "Content-Type": "application/json", "Authorization": `Bearer ${getToken()}` }; }
+
+    $("tabLogin").onclick = () => {
+      $("tabLogin").style.color = "var(--primary)";
+      $("tabRegister").style.color = "var(--text-muted)";
+      $("loginPane").style.display = "block";
+      $("registerPane").style.display = "none";
+    };
+
+    $("tabRegister").onclick = () => {
+      $("tabRegister").style.color = "var(--primary)";
+      $("tabLogin").style.color = "var(--text-muted)";
+      $("registerPane").style.display = "block";
+      $("loginPane").style.display = "none";
+    };
+
+    async function loadProfiles() {
+      try {
+        const res = await fetch(`${API_BASE}/api/profiles`);
+        const profiles = await res.json();
+        const container = $("profiles");
+        container.innerHTML = "";
+        profiles.forEach(p => {
+          const div = document.createElement("div");
+          div.className = "pitem";
+          div.innerHTML = `<span>👤</span> <strong>${p.name}</strong>`;
+          div.onclick = () => selectProfile(p, div);
+          container.appendChild(div);
+        });
+      } catch (e) { console.error(e); }
+    }
+
+    function selectProfile(p, el) {
+      document.querySelectorAll(".pitem").forEach(i => i.classList.remove("active"));
+      el.classList.add("active");
+      selectedId = p.id;
+      $("chatTitle").innerText = p.name;
+      if ($("welcomeMessage")) $("welcomeMessage").style.display = "none";
+      $("chatLog").innerHTML = "";
+      const avatar = $("chatAvatar");
+      avatar.src = p.image;
+      avatar.style.display = "block";
+      
+      if (getToken() || !guestTeaserUsed) {
+        $("chatInput").disabled = false;
+        $("sendBtn").disabled = false;
+      }
+      if (getToken()) { loadHistory(p.id); } 
+      else { appendMessage("them", `Hello, I am ${p.name}. How are you feeling today?`); }
+    }
+
+    async function loadHistory(characterId) {
+      if (!characterId) return;
+      try {
+        const res = await fetch(`${API_BASE}/api/chat/history?characterId=${characterId}`, { headers: authHeaders() });
+        const history = await res.json();
+        $("chatLog").innerHTML = "";
+        history.forEach(m => appendMessage(m.from_user ? "me" : "them", m.text));
+      } catch(e) {}
+    }
+
+    function appendMessage(side, text) {
+      const div = document.createElement("div");
+      div.className = `bubble ${side}`;
+      div.innerText = text;
+      $("chatLog").appendChild(div);
+      $("chatLog").scrollTo({ top: $("chatLog").scrollHeight, behavior: 'smooth' });
+    }
+
+    $("loginBtn").onclick = async () => {
+      const email = $("loginEmail").value.trim().toLowerCase();
+      const password = $("loginPassword").value;
+      const res = await fetch(`${API_BASE}/api/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if (res.ok) { setToken(data.token); location.reload(); } else { alert(data.error); }
+    };
+
+    $("registerBtn").onclick = async () => {
+      const email = $("regEmail").value;
+      const password = $("regPassword").value;
+      const res = await fetch(`${API_BASE}/api/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
+      if (res.ok) { alert("Account created. Please sign in."); $("tabLogin").click(); } else { alert("Error."); }
+    };
+
+    $("sendBtn").onclick = async () => {
+      const text = $("chatInput").value;
+      if (!text || !selectedId) return;
+      appendMessage("me", text);
+      $("chatInput").value = "";
+
+      if (!getToken()) {
+        appendMessage("them", "To continue this professional consultation, please create an account and select a plan.");
+        $("chatInput").disabled = true; $("sendBtn").disabled = true;
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/api/chat`, {
+          method: "POST",
+          headers: authHeaders(),
+          body: JSON.stringify({ characterId: selectedId, message: text })
+        });
+        const data = await res.json();
+        if (res.ok) { appendMessage("them", data.reply); } 
+        else if (res.status === 403) { $("limitModal").style.display = "flex"; }
+      } catch(e) { alert("Connection lost."); }
+    };
+
+    $("logoutBtn").onclick = () => { localStorage.removeItem("jwt"); location.reload(); };
+
+    window.onload = () => {
+      loadProfiles();
+      if (getToken()) {
+        document.body.classList.add("logged-in");
+        $("authSection").style.display = "none";
+        $("logoutBtn").style.display = "block";
+        $("heroText").innerHTML = "<h2>Welcome Back</h2><p>Your mental health journey continues here.</p>";
+      }
+    };
+  </script>
+
+  <div id="limitModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); align-items: center; justify-content: center; z-index: 9999; backdrop-filter: blur(4px);">
+    <div class="card" style="max-width: 400px; width: 90%; text-align: center;">
+      <h3 style="font-family: Playfair Display; font-size: 24px;">Daily Limit Reached</h3>
+      <p style="color: var(--text-muted); margin-bottom: 25px;">To continue your therapeutic sessions without interruption, please choose one of our support plans.</p>
+      <button class="btn primary" onclick="window.location.href='/pricing.html'">View Plans</button>
+      <button class="btn" style="background:none; margin-top:10px; color:var(--text-muted);" onclick="$('limitModal').style.display='none'">Maybe Later</button>
+    </div>
+  </div>
+
+  <footer style="margin-top:80px; padding:40px; text-align:center; font-size:13px; color:var(--text-muted); border-top:1px solid var(--border-light);">
+    &copy; 2024 Therapy4U. Professional AI Counseling. <br><br>
+    <a href="/privacy-policy.html" style="color:var(--text-muted); margin:0 10px;">Privacy Policy</a> | 
+    <a href="/terms-and-conditions.html" style="color:var(--text-muted); margin:0 10px;">Terms & Conditions</a>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Support Plans — Therapy4U</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-main: #f8faf9;
+      --bg-card: #ffffff;
+      --primary: #4a7c72; /* Calm Sage */
+      --primary-hover: #3d665e;
+      --accent: #7fb3a9;
+      --text-dark: #2c3e3a;
+      --text-muted: #6b7c78;
+      --border-light: #e0e7e5;
+      --shadow: 0 20px 60px rgba(0,0,0,0.05);
+    }
+
+    * { box-sizing: border-box; }
+    
+    body {
+      margin: 0;
+      color: var(--text-dark);
+      background-color: var(--bg-main);
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px;
+    }
+
+    .header {
+      text-align: center;
+      max-width: 700px;
+      margin-bottom: 50px;
+    }
+
+    .header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      color: var(--primary);
+      margin: 0 0 15px 0;
+    }
+
+    .header p {
+      font-size: 18px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .pricing-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 40px;
+      flex: 1;
+      min-width: 300px;
+      max-width: 350px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+    }
+
+    .card.featured {
+      border: 2px solid var(--primary);
+    }
+
+    .featured-label {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: white;
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .plan-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 5px;
+    }
+
+    .duration {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 40px 0;
+      text-align: left;
+      flex-grow: 1;
+    }
+
+    .features li {
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+      color: var(--text-muted);
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+    }
+
+    .features li::before {
+      content: "✓";
+      color: var(--primary);
+      margin-right: 12px;
+      font-weight: bold;
+    }
+
+    .btn {
+      background: #f1f5f4;
+      color: var(--primary);
+      border: none;
+      padding: 16px;
+      width: 100%;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn:hover {
+      background: #e2ebe9;
+    }
+
+    .featured .btn {
+      background: var(--primary);
+      color: white;
+    }
+
+    .featured .btn:hover {
+      background: var(--primary-hover);
+    }
+
+    .back-link {
+      margin-top: 40px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--primary);
+    }
+
+    @media (max-width: 768px) {
+      .pricing-container { flex-direction: column; align-items: center; }
+      .card { width: 100%; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <h1>Support Plans</h1>
+    <p>Invest in your mental well-being with continuous access to professional AI psychoanalysis and guidance.</p>
+  </div>
+
+  <div class="pricing-container">
+    <div class="card">
+      <div class="plan-name">Foundational Session</div>
+      <div class="price">$29.95</div>
+      <div class="duration">One-Time Payment • 30 Days</div>
+      <ul class="features">
+        <li>Guidance from any 1 Specialist</li>
+        <li>Full Session History</li>
+        <li>Deep Psychoanalytic Insight</li>
+        <li>Secure Data Encryption</li>
+      </ul>
+      <button class="btn" onclick="checkout('god')">Select Plan</button>
+    </div>
+
+    <div class="card featured">
+      <div class="featured-label">Recommended</div>
+      <div class="plan-name">Comprehensive Care</div>
+      <div class="price">$35.95</div>
+      <div class="duration">One-Time Payment • 30 Days</div>
+      <ul class="features">
+        <li>Access to All 5 Specialists</li>
+        <li>Priority Response Protocol</li>
+        <li>Comprehensive Memory Retention</li>
+        <li>Tailored Coping Strategies</li>
+      </ul>
+      <button class="btn" onclick="checkout('all')">Select Plan</button>
+    </div>
+
+    <div class="card">
+      <div class="plan-name">Lifetime Wellness</div>
+      <div class="price">$49.95</div>
+      <div class="duration">One-Time Payment • Unlimited</div>
+      <ul class="features">
+        <li>Lifetime Consultation Access</li>
+        <li>All Future Specialists Included</li>
+        <li>Unrestricted Session Length</li>
+        <li>Permanent Personal Growth Log</li>
+      </ul>
+      <button class="btn" onclick="checkout('lifetime')">Select Plan</button>
+    </div>
+  </div>
+
+  <a href="/" class="back-link">← Return to Dashboard</a>
+
+  <script>
+    // This logic is identical to your original pricing.html
+    function checkout(planName) {
+      const token = localStorage.getItem("jwt");
+      if (!token) {
+        alert("Please sign in or create an account before choosing a plan.");
+        window.location.href = "/";
+        return;
+      }
+      // Passes plan name to your checkout page exactly as before
+      window.location.href = `/checkout.html?plan=${planName}`;
+    }
+  </script>
+
+</body>
+</html>
